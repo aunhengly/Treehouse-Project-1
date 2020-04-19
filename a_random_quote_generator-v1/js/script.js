@@ -83,24 +83,15 @@ function getRandomQuote(quoteNumber) {
 /***
  * `printQuote` function
  ***/
-function printQuote(message) {
-  var changeQuote = document.getElementById('quote-box');
-  changeQuote.innerHTML = message;
-}
 
-function showRandomQuote(show) {
-  var quoteOutPut = `<p class=quote>${show.quote} </p>
-  <p class='source'> ${show.source} <span class='citation'>${show.citation}</span> <span class= 'year'>${show.year}</span></p>
+function printQuote() {
+  var randomNumber = getRandomQuote(quotes.length); // quotes.length: so the random is flexible, it's depend on the length of the array.
+  var supper = quotes[randomNumber]; // Assigned the 'supper' to get random quote information
+  var divBox = document.getElementById('quote-box'); // variable 'divBox' is to go to 'div' with the ID 'quote-box', so we can replace the quote information that we want to replace on the screen.
+  divBox.innerHTML = `<p class='quote'> ${supper.quote}</p>
+  <p class='source'>${supper.source}<span class='citation'>${supper.citation}</span><span class='year'>${supper.year}</span><span class='tag'>${supper.tag}</span></p>
   `;
-  return quoteOutPut;
 }
-
-var message;
-var randomNumber = getRandomQuote(quotes.length);
-console.log(randomNumber);
-message = showRandomQuote(quotes[randomNumber]);
-printQuote(message);
-
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
