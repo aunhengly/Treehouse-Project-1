@@ -95,14 +95,21 @@ function randomBg() {
  * `printQuote` function
  ***/
 
-setInterval(function printQuote() {
-  var randomNumber = getRandomNum(quotes.length); // quotes.length: so the random is flexible, it's depend on the length of the array.
+function printQuote() {
+  var randomNumber = quotes[getRandomNum(quotes.length)]; // quotes.length: so the random is flexible, it's depend on the length of the array.
   var divBox = document.getElementById('quote-box'); // variable 'divBox' is to go to 'div' with the ID 'quote-box', so we can replace the quote information that we want to replace on the screen.
-  divBox.innerHTML = `<p class='quote'> ${quotes[randomNumber].quote}</p>
-  <p class='source'>${quotes[randomNumber].source}<span class='citation'>${quotes[randomNumber].citation}</span><span class='year'>${quotes[randomNumber].year}</span><span class='tag'>${quotes[randomNumber].tag}</span></p>
+  divBox.innerHTML = `
+  <p class='quote'> ${randomNumber.quote}</p>
+  <p class='source'>${randomNumber.source}
+    <span class='citation'>${randomNumber.citation}</span>
+    <span class='year'>${randomNumber.year}</span>
+    <span class='tag'>${randomNumber.tag}</span>
+  </p>
   `;
   randomBg();
-}, 3000);
+}
+printQuote();
+setInterval(printQuote, 3000);
 
 /***
  * click event listener for the print quote button
