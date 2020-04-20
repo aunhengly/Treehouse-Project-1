@@ -73,25 +73,37 @@ var quotes = [
 ];
 
 /***
- * `getRandomQuote` function
+ * `getRandomNum` function
  ***/
-function getRandomQuote(quoteNumber) {
-  var randomQuote = Math.floor(Math.random() * quoteNumber) + 1;
-  return randomQuote;
+function getRandomNum(randomNum) {
+  var random = Math.floor(Math.random() * randomNum) + 1;
+  return random;
+}
+
+/***
+ * `randomBackground` function
+ */
+function randomBg() {
+  var r = getRandomNum(256);
+  var g = getRandomNum(256);
+  var b = getRandomNum(256);
+  var bgColor = (document.body.style.background = `rgb(${r},${g},${b})`);
+  return bgColor;
 }
 
 /***
  * `printQuote` function
  ***/
 
-function printQuote() {
-  var randomNumber = getRandomQuote(quotes.length); // quotes.length: so the random is flexible, it's depend on the length of the array.
-  var supper = quotes[randomNumber]; // Assigned the 'supper' to get random quote information
+setInterval(function printQuote() {
+  var randomNumber = getRandomNum(quotes.length); // quotes.length: so the random is flexible, it's depend on the length of the array.
   var divBox = document.getElementById('quote-box'); // variable 'divBox' is to go to 'div' with the ID 'quote-box', so we can replace the quote information that we want to replace on the screen.
-  divBox.innerHTML = `<p class='quote'> ${supper.quote}</p>
-  <p class='source'>${supper.source}<span class='citation'>${supper.citation}</span><span class='year'>${supper.year}</span><span class='tag'>${supper.tag}</span></p>
+  divBox.innerHTML = `<p class='quote'> ${randomNumber.quote}</p>
+  <p class='source'>${randomNumber.source}<span class='citation'>${randomNumber.citation}</span><span class='year'>${randomNumber.year}</span><span class='tag'>${randomNumber.tag}</span></p>
   `;
-}
+  randomBg();
+}, 3000);
+
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
