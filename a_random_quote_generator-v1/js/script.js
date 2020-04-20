@@ -76,7 +76,7 @@ var quotes = [
  * `getRandomNum` function
  ***/
 function getRandomNum(randomNum) {
-  var random = Math.floor(Math.random() * randomNum) + 1;
+  var random = Math.floor(Math.random() * randomNum);
   return random;
 }
 
