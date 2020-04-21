@@ -73,21 +73,24 @@ var quotes = [
 ];
 
 /***
- * `getRandomNum` function
+ * `getRandomQuote` function
  ***/
-function getRandomNum(randomNum) {
-  var random = Math.floor(Math.random() * randomNum);
-  return random;
+function getRandomQuote() {
+  let randomQ = Math.floor(Math.random() * quotes.length);
+  return quotes[randomQ];
 }
 
 /***
  * `randomBackground` function
  */
 function randomBg() {
-  var r = getRandomNum(256);
-  var g = getRandomNum(256);
-  var b = getRandomNum(256);
-  var bgColor = (document.body.style.background = `rgb(${r},${g},${b})`);
+  const randomRGB = () => {
+    return Math.floor(Math.random() * 256);
+  };
+  let r = randomRGB();
+  let g = randomRGB();
+  let b = randomRGB();
+  let bgColor = (document.body.style.background = `rgb(${r},${g},${b})`);
   return bgColor;
 }
 
@@ -96,16 +99,23 @@ function randomBg() {
  ***/
 
 function printQuote() {
-  var randomNumber = quotes[getRandomNum(quotes.length)]; // quotes.length: so the random is flexible, it's depend on the length of the array.
-  var divBox = document.getElementById('quote-box'); // variable 'divBox' is to go to 'div' with the ID 'quote-box', so we can replace the quote information that we want to replace on the screen.
-  divBox.innerHTML = `
-  <p class='quote'> ${randomNumber.quote}</p>
-  <p class='source'>${randomNumber.source}
-    <span class='citation'>${randomNumber.citation}</span>
-    <span class='year'>${randomNumber.year}</span>
-    <span class='tag'>${randomNumber.tag}</span>
-  </p>
-  `;
+  var randomQuote = getRandomQuote();
+  // variable 'replacePara' is to go to 'paragraph' with class name 'quote', so we can replace the quote information that we want to replace on the screen.
+  var replacePara = `<p class ='quote'> ${randomQuote.quote};
+  <p class='source'>${randomQuote.source}`;
+  if (randomQuote.citation) {
+    replacePara += `<span class='citation'>${randomQuote.citation}</span>`;
+  }
+  if (randomQuote.year) {
+    replacePara += `<span class='year'>${randomQuote.year}</span>`;
+  }
+  if (randomQuote.tag) {
+    replacePara += `<span class='tag'>${randomQuote.tag}</span>`;
+  }
+  replacePara += `</p>`;
+
+  //Assigning the replacePara data/information into div that have ID 'quote-box'.
+  document.getElementById('quote-box').innerHTML = replacePara;
   randomBg();
 }
 printQuote();
