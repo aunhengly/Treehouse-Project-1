@@ -76,21 +76,27 @@ var quotes = [
  * `getRandomQuote` function
  ***/
 function getRandomQuote() {
+  // assign randomQ to the random number between 0 to the last index of quotes array.
   let randomQ = Math.floor(Math.random() * quotes.length);
+  // return a random quote as an object from quotes array.
   return quotes[randomQ];
 }
 
 /***
- * `randomBackground` function
+ * `randomBg` function: for random color
  */
 function randomBg() {
+  // assign randomRGB to random function that have value from 0 -256.
   const randomRGB = () => {
     return Math.floor(Math.random() * 256);
   };
+  // assign random value for r, g, b from 0 - 256.
   let r = randomRGB();
   let g = randomRGB();
   let b = randomRGB();
+  //assign bgColor to change background color with random value from r,g,b.
   let bgColor = (document.body.style.background = `rgb(${r},${g},${b})`);
+  // return the value of bgColor once the function randomBg() is called.
   return bgColor;
 }
 
@@ -99,26 +105,33 @@ function randomBg() {
  ***/
 
 function printQuote() {
+  //assign randomQuote to get random quote from function getRandomQuote().
   var randomQuote = getRandomQuote();
-  // variable 'replacePara' is to go to 'paragraph' with class name 'quote', so we can replace the quote information that we want to replace on the screen.
+  // assign replacePara to paragraph, span that we want to replace by randomQuote.
   var replacePara = `<p class ='quote'> ${randomQuote.quote};
   <p class='source'>${randomQuote.source}`;
+  //check for citation and add to replacePara if it found.
   if (randomQuote.citation) {
     replacePara += `<span class='citation'>${randomQuote.citation}</span>`;
   }
+  //check for year and add to replacePara if it found.
   if (randomQuote.year) {
     replacePara += `<span class='year'>${randomQuote.year}</span>`;
   }
+  //check for tag and add to replacePara if it found.
   if (randomQuote.tag) {
     replacePara += `<span class='tag'>${randomQuote.tag}</span>`;
   }
+  //add closing 'p' tag to replacePara above.
   replacePara += `</p>`;
-
   //Assigning the replacePara data/information into div that have ID 'quote-box'.
   document.getElementById('quote-box').innerHTML = replacePara;
+  //call function randDomBg() to change background color.
   randomBg();
 }
+//call function printQuote() to print random quote and put on the screen.
 printQuote();
+//change background color every 3 second.
 setInterval(printQuote, 3000);
 
 /***
